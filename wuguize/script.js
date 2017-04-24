@@ -1,7 +1,7 @@
 var canvas=document.getElementById('canvas')
 ctx=canvas.getContext('2d')
-const N=200
-var max=5000,mmax=100
+const N=200//粒子总数
+var max=5000,mmax=100//最大距离(px^2)
 var rgb='#000000'
 var dots=[];
 resize()
@@ -11,12 +11,23 @@ function resize() {//画布自适应窗口
 	canvas.height=window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight
 
 }
+var RAF=(function(){
+	 return window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame || function(callback) {
+          window.setTimeout(callback, 1000 / 60);
+      };
+})();
+//初始化粒子位置与速度
 for (var i = 0; i < N; i++) {
 	var x=Math.random()*canvas.width;
 	var y=Math.random()*canvas.height;
 	var xa=Math.random()*2-1;
 	var ya=Math.random()*2-1;
-	dots.push({x,y,xa,ya})
+	dots.push({
+      x: x,
+      y: y,
+      xa: xa,
+      ya: ya,
+    })
 }
 var warea={x:null,y:null}
 window.onmousemove=function(e) {//获取鼠标位置
@@ -65,27 +76,29 @@ function DotsMove() {
 				}
 		}
 	}
-	if(warea.x==null || warea.y==null) return
+	if(warea.x!=null && warea.y!=null)
+	{
 		for (i = 0; i < dots.length; i++) {
+			dis=Math.sqrt((dots[i].x-warea.x)*(dots[i].x-warea.x)+(dots[i].y-warea.y)*(dots[i].y-warea.y))
+			if(dis<mmax)//距离小于max
 			{
-				dis=Math.sqrt((dots[i].x-warea.x)*(dots[i].x-warea.x)+(dots[i].y-warea.y)*(dots[i].y-warea.y))
-				if(dis<mmax)//距离小于max
+				if(dis>mmax/2)
 				{
-					if(dis>mmax/2)
-					{
-						dots[i].x-=(dots[i].x-warea.x)*0.03
-						dots[i].y-=(dots[i].y-warea.y)*0.03
-					}
-					
-					radio=(mmax-dis)/mmax
-					ctx.beginPath()
-					ctx.lineWidth=radio/2
-					ctx.moveTo(dots[i].x,dots[i].y)
-					ctx.lineTo(warea.x,warea.y)
-					ctx.stroke()
+					dots[i].x-=(dots[i].x-warea.x)*0.03
+					dots[i].y-=(dots[i].y-warea.y)*0.03
 				}
+				
+				radio=(mmax-dis)/mmax
+				ctx.beginPath()
+				ctx.lineWidth=radio/2
+				ctx.moveTo(dots[i].x,dots[i].y)
+				ctx.lineTo(warea.x,warea.y)
+				ctx.stroke()
 			}
 		}
+	}
+	RAF(DotsMove,20);
 }
-DotsMove();
-setInterval(DotsMove, 20)
+DotsMove()
+// setInterval(DotsMove,20);
+
