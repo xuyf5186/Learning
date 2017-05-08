@@ -1,0 +1,14 @@
+F:\MyGame\MyGame\bin\Debug\MyGame.exe.config
+F:\MyGame\MyGame\bin\Debug\MyGame.exe
+F:\MyGame\MyGame\bin\Debug\MyGame.pdb
+F:\MyGame\MyGame\obj\Debug\MyGame.csprojResolveAssemblyReference.cache
+F:\MyGame\MyGame\obj\Debug\MyGame.Properties.Resources.resources
+F:\MyGame\MyGame\obj\Debug\MyGame.csproj.GenerateResource.Cache
+F:\MyGame\MyGame\obj\Debug\MyGame.exe
+F:\MyGame\MyGame\obj\Debug\MyGame.pdb
+F:\MyGame\MyGame\obj\Debug\MyGame.Home.resources
+F:\MyGame\MyGame\obj\Debug\MyGame.MainForm.resources
+F:\MyGame\MyGame\obj\Debug\MyGame.StartForm.resources
+F:\MyGame\MyGame\obj\Debug\MyGame.Bag.resources
+F:\MyGame\MyGame\obj\Debug\MyGame.MyProBar.resources
+F:\MyGame\MyGame\obj\Debug\MyGame.UserControl1.resources
